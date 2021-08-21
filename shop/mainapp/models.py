@@ -42,6 +42,13 @@ class Order(models.Model):
         total = sum([item.get_total for item in orderitems])
         return total
 
+    def get_unique_items(self):
+        unique_items = self.orderitem_set.all()
+        result = 0
+        for item in unique_items:
+            result = result + 1
+        return result
+
     def get_cart_items(self):
         orderitems = self.orderitem_set.all()
         items = sum([item.quantity for item in orderitems])

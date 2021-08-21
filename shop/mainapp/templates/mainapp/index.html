@@ -52,7 +52,7 @@
                 <a href="{% url 'cart' %}" style="color:#212429;">
                     <img  id="cart-icon" src="{% static 'images/cart.png' %}">
                 </a>
-                <span class='badge badge-warning' id='lblCartCount'> 0 </span>
+                <span class='badge badge-warning' id='lblCartCount'>{{cartItems}}</span>
 	        </div>
         </div>
       </div>
