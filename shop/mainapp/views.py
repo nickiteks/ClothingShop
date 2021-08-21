@@ -67,6 +67,10 @@ def updateItem(request):
 
     orderItem.save()
 
+    if action == 'delete':
+        orderItem.delete()
+
+
     if orderItem.quantity <= 0:
         orderItem.delete()
 
