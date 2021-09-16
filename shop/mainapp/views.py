@@ -39,22 +39,29 @@ def cart(request):
         cartItems = order['get_cart_items']
 
         for i in cart:
-            cartItems += cart[i]["quantity"]
+            try:
+                cartItems += cart[i]["quantity"]
 
-            product = Product.objects.get(id=i)
-            total = (product.price * cart[i]["quantity"])
+                product = Product.objects.get(id=i)
+                total = (product.price * cart[i]["quantity"])
 
-            order['get_cart_total'] += total
-            order['get_cart_items'] += cart[i]["quantity"]
+                order['get_cart_total'] += total
+                order['get_cart_items'] += cart[i]["quantity"]
 
-            item = {
-                'product': product,
-                'quantity': cart[i]["quantity"],
-                'get_total': total
-            }
-            items.append(item)
+                item = {
+                    'product': product,
+                    'quantity': cart[i]["quantity"],
+                    'get_total': total
+                }
+                items.append(item)
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+                if not product.digital:
+                    order['shipping'] = True
+            except:
+                pass
+
+
+    context = {'items': items, 'order': order}
     return render(request, 'mainapp/cart.html', context)
 
 
