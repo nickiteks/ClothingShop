@@ -19,6 +19,10 @@ for(var i = 0; i < updateBtns.length; i++){
 function addCookieItem(productId,action){
      console.log('Not logged in ')
 
+     if(action == 'delete'){
+        delete cart[productId]
+     }
+
      if(action == 'add'){
         if(cart[productId] === undefined){
             cart[productId] = {'quantity':1}
@@ -35,6 +39,7 @@ function addCookieItem(productId,action){
             delete cart[productId]
         }
      }
+
     console.log("Cart:",cart)
     document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
 }
