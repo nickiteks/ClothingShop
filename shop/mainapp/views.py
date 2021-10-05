@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.http import Http404
+from django.http import HttpResponseRedirect
 import json
 import datetime
 from .models import *
@@ -121,3 +123,12 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment complete!', safe=False)
+
+
+def product(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+    except:
+        raise Http404('продукт не найден')
+
+    return render(request, "mainapp/product.html", {'product': product})
