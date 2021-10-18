@@ -1,10 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.http import Http404
 from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+
+from django.contrib import messages
+
 import json
 import datetime
 from .models import *
+from django.contrib.auth.models import User
+from .forms import CreateUserForm
 from .utils import cookieCart, cartData, guestOrder
 
 
@@ -132,3 +139,51 @@ def product(request, product_id):
         raise Http404('продукт не найден')
 
     return render(request, "mainapp/product.html", {'product': product})
+
+
+def registerPage(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            user = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            u = User.objects.get(username=user)
+            messages.success(request, 'Account was created for ' + user)
+
+            customer, created = Customer.objects.get_or_create(
+                email=email,
+                user=u,
+                name=user
+            )
+            customer.save()
+
+            return redirect('login')
+
+    context = {'form': form}
+    return render(request, "mainapp/register.html", context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+
+def loginPage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('store')
+        else:
+            messages.info(request, 'incorrect')
+
+    context = {}
+    return render(request, "mainapp/login.html", context)
