@@ -138,7 +138,12 @@ def product(request, product_id):
     except:
         raise Http404('продукт не найден')
 
-    return render(request, "mainapp/product.html", {'product': product})
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    context = {'product': product, 'cartItems': cartItems}
+
+    return render(request, "mainapp/product.html", context)
 
 
 def registerPage(request):
