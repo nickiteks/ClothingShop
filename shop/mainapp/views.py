@@ -135,13 +135,15 @@ def processOrder(request):
 def product(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
+
     except:
         raise Http404('продукт не найден')
 
     data = cartData(request)
     cartItems = data['cartItems']
+    comments = Comment.objects.filter(product_id=product.id)[:20]
 
-    context = {'product': product, 'cartItems': cartItems}
+    context = {'product': product, 'cartItems': cartItems, 'comments': comments}
 
     return render(request, "mainapp/product.html", context)
 

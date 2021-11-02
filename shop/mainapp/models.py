@@ -87,3 +87,10 @@ class ShippingAdder(models.Model):
 
     def __str__(self):
         return self.address
+
+
+class Comment(models.Model):
+    text = models.CharField(max_length=250, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+

@@ -3,12 +3,24 @@
 {% block content%}
 <link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
 
-<img class="left-column img" src="{{product.imageURL}}">
+<img class="left-column" src="{{product.imageURL}}">
 <div class="right-column"><!-- Product Description -->
-<div class="product-description">
-<h1>{{product.name}}</h1>
-The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</div>
-<!-- Product Pricing -->
-<div class="product-price">{{product.price}} ₽</div> <a><button data-product = {{product.id}} data-action = "add" class="btn btn-warning btn-outline-secondary add-btn update-cart">Add to Cart</button></a>
+    <div class="product-description">
+    <h1>{{product.name}}</h1>
+    The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</div>
+    <!-- Product Pricing -->
+    <div class="product-price">{{product.price}} ₽</div> <a><button data-product = {{product.id}} data-action = "add" class="btn btn-warning btn-outline-secondary add-btn update-cart">Add to Cart</button></a>
+</div>
+<div class="comment">
+    <h2>Отзывы</h2>
+    {% for comment in comments%}
+            <h4>{{comment.customer}}:{{comment.text}}</h4>
+    {% endfor %}
+    {% if user.is_authenticated %}
+        <p><textarea name="comment" cols="40" rows="3"></textarea></p>
+        <button class="btn btn-warning">Оставить отзыв</button>
+    {% else %}
+        <h4>Только зарегестрированные пользователи могут оставлять отзыв</h4>
+    {% endif %}
 </div>
 {% endblock content%}
