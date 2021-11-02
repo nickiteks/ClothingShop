@@ -9,6 +9,9 @@ from django.contrib import messages
 
 import json
 import datetime
+
+from django.urls import reverse
+
 from .models import *
 from django.contrib.auth.models import User
 from .forms import CreateUserForm
@@ -146,6 +149,21 @@ def product(request, product_id):
     context = {'product': product, 'cartItems': cartItems, 'comments': comments}
 
     return render(request, "mainapp/product.html", context)
+
+
+def leave_comment(request, product_id):
+    if request.POST['comment_area'] != '':
+        try:
+            product = Product.objects.get(id=product_id)
+
+        except:
+            raise Http404('продукт не найден')
+
+        customer = request.user.customer
+        comment = Comment.objects.create(text=request.POST['comment_area'], product=product, customer=customer)
+        comment.save()
+
+        return HttpResponseRedirect(reverse('product', args=(product.id,)))
 
 
 def registerPage(request):
