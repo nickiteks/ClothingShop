@@ -155,7 +155,6 @@ def leave_comment(request, product_id):
     if request.POST['comment_area'] != '':
         try:
             product = Product.objects.get(id=product_id)
-
         except:
             raise Http404('продукт не найден')
 
@@ -212,3 +211,14 @@ def loginPage(request):
 
     context = {}
     return render(request, "mainapp/login.html", context)
+
+
+def search_results(request):
+    search = request.POST['search']
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    products = Product.objects.filter(name__icontains=search)
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'mainapp/store.html', context)
+

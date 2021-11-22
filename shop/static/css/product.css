@@ -137,9 +137,9 @@ html, body {
     margin-bottom: 20px;
 }
 .comment-cart{
-    width: 200%; /* Ширина слоя */
-    margin-bottom: 7px; /* Значение отступов */
-    padding: 10px; /* Поля вокруг текста */
-    border: 2px solid black; /* Параметры границы */
-    background: #f5f5f5;; /* Цвет фона */
+    width: 200%;
+    margin-bottom: 7px;
+    padding: 10px;
+    border: 2px solid black;
+    background: #f5f5f5;
 }
