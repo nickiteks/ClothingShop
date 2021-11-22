@@ -13,8 +13,20 @@
 </div>
 <div class="comment">
     <h2>Отзывы</h2>
+    <p></p>
+    <p></p>
+    <p></p>
     {% for comment in comments%}
-            <h4>{{comment.customer}}:{{comment.text}}</h4>
+        <div class="comment-cart">
+            <div class="media-body">
+                <div class="well well-lg">
+                    <h4 class="media-heading text-uppercase reviews">{{comment.customer}}: </h4>
+                    <p class="media-comment">
+                      {{comment.text}}
+                    </p>
+                </div>
+            </div>
+        </div>
     {% endfor %}
     {% if user.is_authenticated %}
         <form action="{% url 'leave_comment' product.id %}" method="POST">

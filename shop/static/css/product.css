@@ -125,3 +125,21 @@ html, body {
     top: 700px;
     left: 13%;
 }
+.media .media-object { max-width: 120px; }
+.media-body { position: relative; }
+.media-date {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+.media-comment
+{
+    margin-bottom: 20px;
+}
+.comment-cart{
+    width: 200%; /* Ширина слоя */
+    margin-bottom: 7px; /* Значение отступов */
+    padding: 10px; /* Поля вокруг текста */
+    border: 2px solid black; /* Параметры границы */
+    background: #f5f5f5;; /* Цвет фона */
+}
