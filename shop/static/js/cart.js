@@ -1,5 +1,5 @@
 var updateBtns = document.getElementsByClassName('update-cart')
-
+var updateSizes = document.getElementsByClassName('size')
 
 for(var i = 0; i < updateBtns.length; i++){
     updateBtns[i].addEventListener('click',function(){
@@ -56,7 +56,7 @@ function updateUserOrder(productId,action){
             'Content-Type':'application/json',
             'X-CSRFToken':csrftoken,
         },
-        body:JSON.stringify({'productId':productId,'action': action})
+        body:JSON.stringify({'productId':productId,'action': action,'size':"XS"})
     })
 
     .then((response)=>{
@@ -66,5 +66,42 @@ function updateUserOrder(productId,action){
     .then((data)=>{
         console.log('data:',data)
         location.reload()
+    })
+}
+
+
+for(var i = 0; i < updateSizes.length; i++){
+    updateSizes[i].addEventListener('change',function() {
+    var productId = this.dataset.product
+    var action = this.dataset.action
+    ChangeSize(productId,action,i);
+    });
+}
+
+function ChangeSize(productId,action,index){
+    var url = '/update_item/'
+    var size;
+    for(var i = 0; i < updateSizes.length; i++){
+        var attr = updateSizes[i].dataset.product
+        if(attr == productId){
+            size = updateSizes[i].options[updateSizes[i].selectedIndex].text
+        }
+    }
+
+    fetch(url,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'productId':productId,'action': action,'size':size})
+    })
+
+    .then((response)=>{
+        return response.json()
+    })
+
+    .then((data)=>{
+        console.log('data:',data)
     })
 }

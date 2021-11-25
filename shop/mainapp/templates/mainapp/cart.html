@@ -27,6 +27,7 @@
                 <div class="cart-row">
                     <div style="flex:2"></div>
                     <div style="flex:2"><strong>Item</strong></div>
+                    <div style="flex:1"><strong>Size</strong></div>
                     <div style="flex:1"><strong>Price</strong></div>
                     <div style="flex:1"><strong>Quantity</strong></div>
                     <div style="flex:1"><strong>Total</strong></div>
@@ -36,6 +37,16 @@
                 <div class="cart-row">
                     <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
                     <div style="flex:2">{{item.product.name}}</div>
+                    <div style="flex:1">
+                                <select data-product={{item.product.id}} data-action="size" name="size" class="size">
+                                      <option value="1">XS</option>
+                                      <option value="2">S</option>
+                                      <option value="3">M</option>
+                                      <option value="4">L</option>
+                                      <option value="5">XL</option>
+                                      <option value="6">XXL</option>
+                                </select>
+                    </div>
                     <div style="flex:1">{{item.product.price|floatformat:2}} ₽</div>
                     <div style="flex:1">
 						<p class="quantity">{{item.quantity}}</p>
