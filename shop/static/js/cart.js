@@ -74,7 +74,11 @@ for(var i = 0; i < updateSizes.length; i++){
     updateSizes[i].addEventListener('change',function() {
     var productId = this.dataset.product
     var action = this.dataset.action
-    ChangeSize(productId,action,i);
+    if(user === 'AnonymousUser'){
+            addCookieSize(productId,action)
+        }else{
+            ChangeSize(productId,action,i);
+        }
     });
 }
 
@@ -104,4 +108,21 @@ function ChangeSize(productId,action,index){
     .then((data)=>{
         console.log('data:',data)
     })
+}
+
+function addCookieSize(productId,action){
+    console.log('Not logged in ')
+    var size;
+    for(var i = 0; i < updateSizes.length; i++){
+        var attr = updateSizes[i].dataset.product
+        if(attr == productId){
+            size = updateSizes[i].options[updateSizes[i].selectedIndex].text
+        }
+    }
+    if(action == 'size'){
+        cart[productId] = {'size':size,'quantity':cart[productId]['quantity']}
+    }
+
+    console.log("Cart:",cart)
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
 }

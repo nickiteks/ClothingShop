@@ -56,7 +56,7 @@ def updateItem(request):
 
     print('Action:', action)
     print('ProductId:', productId)
-    #print(data['size'])
+    # print(data['size'])
     customer = request.user.customer
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -115,8 +115,11 @@ def processOrder(request):
             orderItem = OrderItem.objects.create(
                 product=product,
                 order=order,
+                size=item['size'],
                 quantity=item['quantity']
             )
+
+        OrderItem.save()
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
@@ -224,4 +227,3 @@ def search_results(request):
     products = Product.objects.filter(name__icontains=search)
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'mainapp/store.html', context)
-
