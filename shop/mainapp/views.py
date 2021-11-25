@@ -56,7 +56,7 @@ def updateItem(request):
 
     print('Action:', action)
     print('ProductId:', productId)
-    print(data['size'])
+    #print(data['size'])
     customer = request.user.customer
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
