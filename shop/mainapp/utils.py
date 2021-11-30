@@ -18,17 +18,26 @@ def cookieCart(request):
 
             product = Product.objects.get(id=i)
             total = (product.price * cart[i]["quantity"])
-            size = cart[i]['size']
+            try:
+                size = cart[i]['size']
+            except:
+                size = None
 
             order['get_cart_total'] += total
             order['get_cart_items'] += cart[i]["quantity"]
-
-            item = {
-                'product': product,
-                'quantity': cart[i]["quantity"],
-                'get_total': total,
-                'size': size
-            }
+            if size is None:
+                item = {
+                    'product': product,
+                    'quantity': cart[i]["quantity"],
+                    'get_total': total,
+                }
+            else:
+                item = {
+                    'product': product,
+                    'quantity': cart[i]["quantity"],
+                    'get_total': total,
+                    'size': size
+                }
             items.append(item)
 
             if not product.digital:

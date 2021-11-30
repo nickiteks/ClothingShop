@@ -119,7 +119,7 @@ def processOrder(request):
                 quantity=item['quantity']
             )
 
-        OrderItem.save()
+        OrderItem().save()
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
