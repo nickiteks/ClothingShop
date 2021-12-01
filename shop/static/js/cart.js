@@ -107,6 +107,7 @@ function ChangeSize(productId,action,index){
 
     .then((data)=>{
         console.log('data:',data)
+        location.reload()
     })
 }
 
@@ -125,4 +126,5 @@ function addCookieSize(productId,action){
 
     console.log("Cart:",cart)
     document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    location.reload()
 }

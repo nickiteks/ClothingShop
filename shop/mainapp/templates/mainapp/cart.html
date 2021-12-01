@@ -47,6 +47,11 @@
                                       <option value="5">XL</option>
                                       <option value="6">XXL</option>
                                 </select>
+                                {% if item.size == None %}
+                                    <h6 style="color: red">Выберите размер!</h6>
+                                {% else %}
+                                    <h6>Выбранный размер: {{item.size}}</h6>
+                                {% endif %}
                     </div>
                     <div style="flex:1">{{item.product.price|floatformat:2}} ₽</div>
                     <div style="flex:1">
