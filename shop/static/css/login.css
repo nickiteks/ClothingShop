@@ -6,6 +6,7 @@ body,
 		}
 		.user_card {
 			width: 350px;
+			height:55%;
 			margin-top: 100px;
 			background: hsl(0, 0%, 35%);
 			position: relative;

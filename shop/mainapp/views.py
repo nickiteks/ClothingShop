@@ -221,6 +221,7 @@ def loginPage(request):
 
 def search_results(request):
     search = request.POST['search']
+    search = search[1:]
     data = cartData(request)
     cartItems = data['cartItems']
 
