@@ -64,7 +64,14 @@
 					<div style="flex:2"><p>{{item.product.name}}</p></div>
 					<div style="flex:1"><p>{{item.product.price|floatformat:2}} ₽</p></div>
 					<div style="flex:1"><p>x {{item.quantity}}</p></div>
-					<div style="flex:1"><p>{{item.size}}</p></div>
+					<div style="flex:1"><p>
+								{% if item.size == None %}
+                                    <h6 style="color: red">Выберите размер!</h6>
+                                {% else %}
+                                    <h6>Выбранный размер: {{item.size}}</h6>
+                                {% endif %}
+						</p>
+					</div>
 				</div>
 				{% endfor %}
 
