@@ -9,7 +9,8 @@
     <h2>{{product.name}}</h2>
     {{product.description}}</div>
     <!-- Product Pricing -->
-    <div class="product-price">{{product.price}} ₽</div> <a><button data-product = {{product.id}} data-action = "add" class="btn btn-warning add-btn update-cart">Add to Cart</button></a>
+    <div class="product-price">{{product.price}} ₽</div>
+    <a><button id = {{product.id}} data-product = {{product.id}} data-action = "add" class="btn btn-warning add-btn update-cart">Add to Cart</button></a>
 </div>
 <div class="comment">
     <h2>Отзывы</h2>
@@ -31,8 +32,8 @@
     {% if user.is_authenticated %}
         <form action="{% url 'leave_comment' product.id %}" method="POST">
             {% csrf_token %}
-            <p><textarea name="comment_area" cols="40" rows="3"></textarea></p>
-            <button class="btn btn-warning">Оставить отзыв</button>
+            <p><textarea id = '30' name="comment_area" cols="40" rows="3"></textarea></p>
+            <button id = '40' name = 'comment' class="btn btn-warning">Оставить отзыв</button>
         </form>
     {% else %}
         <h4>Только зарегестрированные пользователи могут оставлять отзыв</h4>
